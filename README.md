@@ -9,7 +9,7 @@ FedProx - idea
 DLG(Deep Leakage from Gradients) - idea
 
 
-Not Yet
+Not Yet :
 SCAFFOLD
 FedDyn
 FedSAM
