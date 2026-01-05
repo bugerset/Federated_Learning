@@ -2,15 +2,14 @@
 
 What I learned?
 
-FedSGD, FedAVG
-  ㄴ idea
+FedSGD, FedAVG - idea
   
-FedProx
-  ㄴ idea
+FedProx - idea
 
-DLG(Deep Leakage from Gradients)
- ㄴ idea
- 
+DLG(Deep Leakage from Gradients) - idea
+
+
+Not Yet
 SCAFFOLD
 FedDyn
 FedSAM
