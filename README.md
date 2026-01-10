@@ -109,9 +109,9 @@ Key arguments (from utils/parser.py):
 	•	**Data partitioning**
 	•	--partition in {iid,niid}
 	•	--alpha: Dirichlet concentration parameter controlling Non-IID severity.
-    ├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
-  	├──	α = 0.5: moderate Non-IID
-  	└──	α = 0.8 ~ 1.0: closer to IID
+		    ├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
+		  	├──	α = 0.5: moderate Non-IID
+		  	└──	α = 0.8 ~ 1.0: closer to IID
 	•	--min-size minimum samples per client in non-IID (default 10)
 	•	--print-labels / --no-print-labels
 ```
@@ -122,10 +122,7 @@ Notes on Implementation
 	•	Uses SGD with momentum=0.9 and weight decay=5e-4
 	•	Returns the local state_dict moved to CPU (for aggregation)
 	•	Server aggregation (fl/server.py)
-	•	Weighted average of parameters using client dataset sizes like:
-[
-w \leftarrow \sum_k \frac{n_k}{\sum_j n_j} w_k
-]
+	•	Weighted average of parameters using client dataset sizes
 	•	Non-IID partitioning (data/partition.py)
 	•	Uses a Dirichlet distribution per class across clients
 	•	Includes a safety loop to ensure each client has at least min_size samples
