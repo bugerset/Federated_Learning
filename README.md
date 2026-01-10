@@ -26,18 +26,18 @@ So the easiest way to run without changing code is to organize files like this:
 ```
 ├── main.py
 ├── data/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── cifar10.py
 │   └── partition.py
 ├── fl/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── client.py
 │   └── server.py
 ├── models/
-│   ├── init.py
+│   ├── __init__.py
 │   └── mobilenet.py
 └── utils/
- 	├── init.py
+ 	├── __init__.py
  	├── device.py
     ├── eval.py
     ├── parser.py
