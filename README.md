@@ -23,6 +23,7 @@ This project simulates the typical federated learning loop:
 
 Your `main.py` imports modules like `data.cifar10`, `fl.client`, etc.  
 So the easiest way to run without changing code is to organize files like this:
+```
 ├── main.py
 ├── data/
 │   ├── init.py
@@ -41,6 +42,7 @@ So the easiest way to run without changing code is to organize files like this:
 ├── eval.py
 ├── parser.py
 └── seed.py
+```
 
 > If you keep everything in one folder, you must edit imports in `main.py` accordingly.
 
@@ -70,10 +72,12 @@ python main.py --train fedprox --mu 0.1 --partition niid --alpha 0.5
 ## Device Selection
 
 The code supports:
+```
 	•	--device auto (default): selects CUDA if available, else MPS (Apple Silicon), else CPU
 	•	--device cuda
 	•	--device mps
 	•	--device cpu
+```
 
 Example:
 ```bash
@@ -83,6 +87,7 @@ python main.py --device auto
 ## CLI Arguments
 
 Key arguments (from utils/parser.py):
+```
 	•	**Reproducibility / compute**
 	•	--seed (default: 845)
 	•	--device in {auto,cpu,cuda,mps}
@@ -109,8 +114,10 @@ Key arguments (from utils/parser.py):
   	└──	α = 0.8 ~ 1.0: closer to IID
 	•	--min-size minimum samples per client in non-IID (default 10)
 	•	--print-labels / --no-print-labels
+```
 
 Notes on Implementation
+```
 	•	Client training (fl/client.py)
 	•	Uses SGD with momentum=0.9 and weight decay=5e-4
 	•	Returns the local state_dict moved to CPU (for aggregation)
@@ -122,6 +129,7 @@ w \leftarrow \sum_k \frac{n_k}{\sum_j n_j} w_k
 	•	Non-IID partitioning (data/partition.py)
 	•	Uses a Dirichlet distribution per class across clients
 	•	Includes a safety loop to ensure each client has at least min_size samples
+```
 
 ## Expected Output
 
