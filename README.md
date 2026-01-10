@@ -88,25 +88,29 @@ python main.py --device auto
 
 Key arguments (from utils/parser.py):
 ```
-	•	**Reproducibility / compute**
+	•	Reproducibility / compute
 	•	--seed (default: 845)
 	•	--device in {auto,cpu,cuda,mps}
-	•	**Training method**
+
+	•	Training method
 	•	--train in {fedavg,fedsgd,fedprox}
 	•	--mu (FedProx proximal strength, default 0.1)
-	•	**Dataset**
+
+	•	Dataset
 	•	--data-root (default ./data)
 	•	--augment (train-time augmentation)
 	•	--normalize / --no-normalize
 	•	--test-batch-size (default 128)
-	•	**Federated learning config**
+
+	•	Federated learning config
 	•	--num-clients (default 10)
 	•	--client-frac fraction of clients sampled per round (default 0.25)
 	•	--local-epochs (default 1)
 	•	--batch-size (default 100)
 	•	--lr learning rate (default 1e-3)
 	•	--rounds communication rounds (default 5)
-	•	**Data partitioning**
+
+	•	Data partitioning
 	•	--partition in {iid,niid}
 	•	--alpha: Dirichlet concentration parameter controlling Non-IID severity.
 		    ├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
