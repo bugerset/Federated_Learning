@@ -37,11 +37,11 @@ So the easiest way to run without changing code is to organize files like this:
 │   ├── init.py
 │   └── mobilenet.py
 └── utils/
-├── init.py
-├── device.py
-├── eval.py
-├── parser.py
-└── seed.py
+ 	├── init.py
+ 	├── device.py
+    ├── eval.py
+    ├── parser.py
+    └── seed.py
 ```
 
 > If you keep everything in one folder, you must edit imports in `main.py` accordingly.
