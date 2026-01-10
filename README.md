@@ -107,8 +107,8 @@ Key arguments (from utils/parser.py):
 	•	--client-frac fraction of clients sampled per round (default 0.25)
 	•	--local-epochs (default 1)
 	•	--batch-size (default 100)
-	•	--lr learning rate (default 1e-3)
-	•	--rounds communication rounds (default 5)
+	•	--lr learning rate (default 0.005)
+	•	--rounds communication rounds (default 10)
 
 	•	Data partitioning
 	•	--partition in {iid,niid}
