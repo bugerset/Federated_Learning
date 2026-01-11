@@ -21,7 +21,7 @@ def parse_args():
     parser.add_argument("--client-frac", type=float, default=0.25)
     parser.add_argument("--local-epochs", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=100)
-    parser.add_argument("--lr", type=float, default=1e-3)
+    parser.add_argument("--lr", type=float, default=1e-2)
     parser.add_argument("--rounds", type=int, default=10)
 
     # IID, N-IID setting
@@ -30,5 +30,12 @@ def parse_args():
     parser.add_argument("--min-size", type=int, default=10)
     parser.add_argument("--print-labels", dest="print_labels", action="store_true", default=True)
     parser.add_argument("--no-print-labels", dest="print_labels", action="store_false")
+
+    # Learning rate Scheduler
+    parser.add_argument("--lr-factor", type=float, default=0.5)
+    parser.add_argument("--lr-patience", type=int, default=5)
+    parser.add_argument("--min-lr", type=float, default=1e-6)    
+    parser.add_argument("--lr-threshold", type=float, default=1e-4)
+    parser.add_argument("--lr-cooldown", type=int, default=0)
 
     return parser.parse_args()
