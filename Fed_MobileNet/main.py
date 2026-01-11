@@ -24,6 +24,21 @@ def main():
     test_loader = DataLoader(test_ds, batch_size=args.test_batch_size, shuffle=False)
     global_model = MobileNet(num_classes=10).to(device)
 
+    lr_holder = nn.Parameter(torch.zeros(1, device=device), requires_grad=True)
+    lr_opt = torch.optim.SGD([lr_holder], lr=args.lr)
+
+    scheduler = ReduceLROnPlateau(
+        lr_opt,
+        mode="min",
+        factor=args.lr_factor,
+        patience=args.lr_patience,
+        threshold=args.lr_threshold,
+        cooldown=args.lr_cooldown,
+        min_lr=args.min_lr,
+    )
+
+    current_lr = lr_opt.param_groups[0]["lr"]
+
     if args.partition == "niid":
         clients = NIID_partition(train_ds, num_clients=args.num_clients, seed=args.seed, alpha=args.alpha, min_size=args.min_size)
     else:
@@ -48,7 +63,7 @@ def main():
                     clients[cid],
                     epochs=args.local_epochs,
                     batch_size=args.batch_size,
-                    lr=args.lr,
+                    lr=current_lr,
                     device=device
                 )
             elif args.train == "fedsgd":
@@ -57,7 +72,7 @@ def main():
                     clients[cid],
                     epochs=1,
                     batch_size=len(clients[cid]),
-                    lr=args.lr,
+                    lr=current_lr,
                     device=device
                 )
             else:
@@ -66,7 +81,7 @@ def main():
                     clients[cid],
                     epochs=args.local_epochs,
                     batch_size=args.batch_size,
-                    lr=args.lr,
+                    lr=current_lr,
                     device=device,
                     mu=args.mu
                 )
@@ -78,6 +93,15 @@ def main():
         print("\n=== Evaluate global model {0} Round ===".format(r + 1))
         acc, loss = eval(global_model, test_loader, device=device, verbose=False)
         print(f"[{r+1:02d}] acc={acc*100:.2f}%, loss={loss:.6f}")
+        
+        prev_lr = current_lr
+        scheduler.step(loss)
+        current_lr = lr_opt.param_groups[0]["lr"]
+
+        if current_lr != prev_lr:
+            print(f"--> LR reduced: {prev_lr:.6g} -> {current_lr:.6g}")
+            
+        print("=====================================\n")
         print("=====================================\n")
 
 if __name__ == "__main__":
