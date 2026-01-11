@@ -107,14 +107,14 @@ Key arguments (from utils/parser.py):
 	•	--client-frac fraction of clients sampled per round (default 0.25)
 	•	--local-epochs (default 1)
 	•	--batch-size (default 100)
-	•	--lr learning rate (default 0.005)
+	•	--lr learning rate (default 1e-2)
 	•	--rounds communication rounds (default 10)
 
 	•	Data partitioning
 	•	--partition in {iid,niid}
 	•	--alpha: Dirichlet concentration parameter controlling Non-IID severity.
 		    ├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
-		  	├──	α = 0.5: moderate Non-IID
+		  	├──	α = 0.5: moderate Non-IID (default)
 		  	└──	α = 0.8 ~ 1.0: closer to IID
 	•	--min-size minimum samples per client in non-IID (default 10)
 	•	--print-labels / --no-print-labels
