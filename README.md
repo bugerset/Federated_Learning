@@ -118,6 +118,13 @@ Key arguments (from utils/parser.py):
 		  	└──	α = 0.8 ~ 1.0: closer to IID
 	•	--min-size minimum samples per client in non-IID (default 10)
 	•	--print-labels / --no-print-labels
+
+	•	Learning rate Scheduler (ReduceOnPlateau)
+	•	--lr-factor learning rate * factor (default 0.5)
+	•	--lr-patience (default 5)
+	•	--min-lr (deafult 1e-6)
+	•	--lr-threshold (default 1e-4)
+	•	--lr-cooldown (default 0)
 ```
 
 Notes on Implementation
