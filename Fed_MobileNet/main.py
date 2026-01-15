@@ -108,9 +108,9 @@ def main():
                     lr=current_lr,
                     device=device
                 )
+                delta_cs.append(delta_c)
+                client_cs[cid] = c_i_new
 
-            delta_cs.append(delta_c)
-            client_cs[cid] = c_i_new
             client_states.append(state)
             client_sizes.append(n_k)
 
