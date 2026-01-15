@@ -1,10 +1,14 @@
-import argparse
 import numpy as np
+import copy
 import torch
+import torch.nn as nn
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader
 from data import cifar10
 from data.partition import IID_partition, NIID_partition, print_label_counts
-from fl.client import local_train, local_train_prox
+from fl.fedavg import fedavg
+from fl.fedprox import fedprox
+from fl.scaffold import scaffold, init_control_variates, update_server_c
 from fl.server import server_train
 from models.mobilenet import MobileNet
 from utils.seed import set_seed
@@ -39,6 +43,13 @@ def main():
 
     current_lr = lr_opt.param_groups[0]["lr"]
 
+    if args.train == "scaffold":
+        server_c = init_control_variates(global_model)
+        client_cs = [copy.deepcopy(server_c) for _ in range(args.num_clients)]
+    else:
+        server_c = None
+        client_cs = None
+
     if args.partition == "niid":
         clients = NIID_partition(train_ds, num_clients=args.num_clients, seed=args.seed, alpha=args.alpha, min_size=args.min_size)
     else:
@@ -55,10 +66,11 @@ def main():
 
         client_states = []
         client_sizes = []
+        delta_cs = []
 
         for cid in selected:
             if args.train == "fedavg":
-                state, n_k = local_train(
+                state, n_k = fedavg(
                     global_model,
                     clients[cid],
                     epochs=args.local_epochs,
@@ -67,7 +79,7 @@ def main():
                     device=device
                 )
             elif args.train == "fedsgd":
-                state, n_k = local_train(
+                state, n_k = fedavg(
                     global_model,
                     clients[cid],
                     epochs=1,
@@ -75,8 +87,8 @@ def main():
                     lr=current_lr,
                     device=device
                 )
-            else:
-                state, n_k = local_train_prox(
+            elif args.train == "fedprox":
+                state, n_k = fedprox(
                     global_model,
                     clients[cid],
                     epochs=args.local_epochs,
@@ -85,24 +97,38 @@ def main():
                     device=device,
                     mu=args.mu
                 )
+            elif args.train == "scaffold":
+                state, n_k, delta_c, c_i_new = scaffold(
+                    global_model,
+                    clients[cid],
+                    c=server_c,
+                    c_i=client_cs[cid],
+                    epochs=args.local_epochs,
+                    batch_size=args.batch_size,
+                    lr=current_lr,
+                    device=device
+                )
+
+            delta_cs.append(delta_c)
+            client_cs[cid] = c_i_new
             client_states.append(state)
             client_sizes.append(n_k)
 
         global_model = server_train(global_model, client_states, client_sizes)
 
+        if args.train == "scaffold":
+            server_c = update_server_c(server_c, delta_cs)
+
         print("\n=== Evaluate global model {0} Round ===".format(r + 1))
         acc, loss = eval(global_model, test_loader, device=device, verbose=False)
         print(f"[{r+1:02d}] acc={acc*100:.2f}%, loss={loss:.6f}")
-        
+
         prev_lr = current_lr
         scheduler.step(loss)
         current_lr = lr_opt.param_groups[0]["lr"]
 
         if current_lr != prev_lr:
             print(f"--> LR reduced: {prev_lr:.6g} -> {current_lr:.6g}")
-            
-        print("=====================================\n")
-        print("=====================================\n")
 
 if __name__ == "__main__":
     main()
