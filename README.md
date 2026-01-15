@@ -5,6 +5,7 @@ Supports:
 - **FedAvg**   (client local training + weighted model averaging)
 - **FedSGD**   (1 epoch with full client batch to simulate gradient-style update)
 - **FedProx**  (FedAvg with a proximal regularization term)
+- **SCAFFOLD** (SCAFFOLD with control variation)
 - **IID** and **Non-IID** partitioning (Dirichlet-based)
 
 ## Project Overview
@@ -31,7 +32,9 @@ So the easiest way to run without changing code is to organize files like this:
 │   └── partition.py
 ├── fl/
 │   ├── __init__.py
-│   ├── client.py
+│   ├── fedavg.py
+│	├── fedprox.py
+│	├── scaffold.py
 │   └── server.py
 ├── models/
 │   ├── __init__.py
@@ -93,7 +96,7 @@ Key arguments (from utils/parser.py):
 	•	--device in {auto,cpu,cuda,mps}
 
 	•	Training method
-	•	--train in {fedavg,fedsgd,fedprox}
+	•	--train in {fedavg,fedsgd,fedprox,scaffold}
 	•	--mu (FedProx proximal strength, default 0.1)
 
 	•	Dataset
@@ -129,8 +132,8 @@ Key arguments (from utils/parser.py):
 
 Notes on Implementation
 ```
-	•	Client training (fl/client.py)
-	•	Uses SGD with momentum=0.9 and weight decay=5e-4
+	•	Client training (fl/fedavg.py, fl/fedprox.py, fl/scaffold.py)
+	•	Uses SGD with momentum=0.9 and weight decay=5e-4 (In scaffold, no momentum and weight decay)
 	•	Returns the local state_dict moved to CPU (for aggregation)
 	•	Server aggregation (fl/server.py)
 	•	Weighted average of parameters using client dataset sizes
