@@ -6,7 +6,7 @@ def parse_args():
     # seed, device, train function setting
     parser.add_argument("--seed", type=int, default=845)
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda", "mps"])
-    parser.add_argument("--train", type=str, default="fedavg", choices=["fedavg", "fedsgd", "fedprox"])
+    parser.add_argument("--train", type=str, default="fedavg", choices=["fedavg", "fedsgd", "fedprox", "scaffold"])
     parser.add_argument("--mu", type=float, default=0.1)
 
     # dataset setting
