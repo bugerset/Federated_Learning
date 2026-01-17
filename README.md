@@ -1,4 +1,4 @@
-# Federated Learning (FedAvg / FedSGD / FedProx) on CIFAR-10 with MobileNet (PyTorch)
+# Federated Learning (FedAvg / FedSGD / FedProx) on CIFAR-10 and MNIST with MobileNet (PyTorch)
 
 A simple federated learning **simulation** in PyTorch using **MobileNet** on **CIFAR-10**.  
 Supports:
@@ -12,7 +12,7 @@ Supports:
 
 This project simulates the typical federated learning loop:
 
-1. Load CIFAR-10 train/test
+1. Load CIFAR-10 or MNIST train/test
 2. Split training set into multiple client datasets (IID or Non-IID)
 3. For each round:
    - Randomly sample a fraction of clients
@@ -29,6 +29,7 @@ So the easiest way to run without changing code is to organize files like this:
 ├── data/
 │   ├── __init__.py
 │   ├── cifar10.py
+│	├── mnist.py
 │   └── partition.py
 ├── fl/
 │   ├── __init__.py
@@ -100,6 +101,7 @@ Key arguments (from utils/parser.py):
 	•	--mu (FedProx proximal strength, default 0.1)
 
 	•	Dataset
+	•   --data-set (default cifar10, choices=[cifar10, mnist]
 	•	--data-root (default ./data)
 	•	--augment (train-time augmentation)
 	•	--normalize / --no-normalize
