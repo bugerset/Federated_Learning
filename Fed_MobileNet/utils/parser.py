@@ -10,6 +10,7 @@ def parse_args():
     parser.add_argument("--mu", type=float, default=0.1)
 
     # dataset setting
+    parser.add_argument("--data-set", type=str, default="cifar10", choices=["cifar10, mnist"])
     parser.add_argument("--data-root", type=str, default="./data")
     parser.add_argument("--augment", action="store_true")
     parser.add_argument("--normalize", dest="normalize", action="store_true", default=True)
