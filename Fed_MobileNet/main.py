@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader
+from data import mnist
 from data import cifar10
 from data.partition import IID_partition, NIID_partition, print_label_counts
 from fl.fedavg import fedavg
@@ -23,10 +24,15 @@ def main():
 
     device = select_device(args.device)
     print(f"Device => {device}")
-
-    train_ds, test_ds = cifar10.get_cifar10(root=args.data_root, normalize=args.normalize, augment=args.augment)
+    
+    if args.data_set == "cifar10":
+        train_ds, test_ds = cifar10.get_cifar10(root=args.data_root, normalize=args.normalize, augment=args.augment)
+        global_model = MobileNet(num_classes=10, in_channels=3).to(device)
+    else:
+        train_ds, test_ds = mnist.get_mnist(root=args.data_root, normalize=args.normalize, augment=args.augment)
+        global_model = MobileNet(num_classes=10, in_channels=1).to(device)
+        
     test_loader = DataLoader(test_ds, batch_size=args.test_batch_size, shuffle=False)
-    global_model = MobileNet(num_classes=10).to(device)
 
     lr_holder = nn.Parameter(torch.zeros(1, device=device), requires_grad=True)
     lr_opt = torch.optim.SGD([lr_holder], lr=args.lr)
