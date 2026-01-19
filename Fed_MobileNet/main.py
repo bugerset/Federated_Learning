@@ -27,10 +27,10 @@ def main():
     
     if args.data_set == "cifar10":
         train_ds, test_ds = cifar10.get_cifar10(root=args.data_root, normalize=args.normalize, augment=args.augment)
-        global_model = MobileNet(num_classes=10, in_channels=3).to(device)
+        global_model = MobileNet(num_classes=10, in_channel=3).to(device)
     else:
         train_ds, test_ds = mnist.get_mnist(root=args.data_root, normalize=args.normalize, augment=args.augment)
-        global_model = MobileNet(num_classes=10, in_channels=1).to(device)
+        global_model = MobileNet(num_classes=10, in_channel=1).to(device)
         
     test_loader = DataLoader(test_ds, batch_size=args.test_batch_size, shuffle=False)
 
