@@ -22,7 +22,7 @@ class DepthwiseSeparableConv(nn.Module):
         return out
 
 class MobileNet(nn.Module):
-    def __init__(self, num_classes = 1000):
+    def __init__(self, num_classes = 1000, in_channel=3):
         super(MobileNet, self).__init__()
 
         def conv_bn(in_channels, out_channels, stride):
@@ -33,7 +33,7 @@ class MobileNet(nn.Module):
             )
 
         self.model = nn.Sequential(
-            conv_bn(3, 16, 1),
+            conv_bn(in_channel, 16, 1),
             DepthwiseSeparableConv(16, 32, 1),
             DepthwiseSeparableConv(32, 64, 2),
             DepthwiseSeparableConv(64, 128, 1),
