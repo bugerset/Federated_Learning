@@ -1,4 +1,4 @@
-# Federated Learning (FedAvg / FedSGD / FedProx) on CIFAR-10 and MNIST with MobileNet (PyTorch)
+# Federated Learning (FedAvg / FedSGD / FedProx / SCAFFOLD) on CIFAR-10 and MNIST with MobileNet (PyTorch)
 
 A simple federated learning **simulation** in PyTorch using **MobileNet** on **CIFAR-10**.  
 Supports:
