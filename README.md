@@ -101,7 +101,7 @@ Key arguments (from utils/parser.py):
 	•	--mu (FedProx proximal strength, default 0.1)
 
 	•	Dataset
-	•   --data-set (default cifar10, choices=[cifar10, mnist]
+	•   --data-set (default cifar10, choices=[cifar10, mnist])
 	•	--data-root (default ./data)
 	•	--augment (train-time augmentation)
 	•	--normalize / --no-normalize
