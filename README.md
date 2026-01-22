@@ -22,7 +22,7 @@ This project simulates the typical federated learning loop:
 
 ## Recommended Folder Structure
 
-Your `main.py` imports modules like `data.cifar10`, `fl.client`, etc.  
+Your `main.py` imports modules like `data.cifar10`, `fl.fedavg`, etc.  
 So the easiest way to run without changing code is to organize files like this:
 ```
 ├── main.py
