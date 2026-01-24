@@ -12,7 +12,6 @@ def get_mnist(root="./data", normalize = True, augment = False):
         # RandomCrop & HorizontalFlip
         train_tf += [
             transforms.RandomCrop(32, padding=4),
-            transforms.RandomHorizontalFlip(),
         ]
 
     train_tf.append(transforms.ToTensor())
