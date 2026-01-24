@@ -157,4 +157,7 @@ With FedAVG, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs
 <br>113 Round ACC=66.80%, loss=0.975469
 
 <br>With FedProx, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs=5, batch_sie=50, lr=1e-2, rounds=200, partition="niid", alpha=0.4:
+<br>91 Round ACC=59.35%, loss = 1.119520
+<br>104 Round ACC=61.32%, loss=1.094311
+
 
