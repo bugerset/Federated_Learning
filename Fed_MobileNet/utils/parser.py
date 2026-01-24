@@ -1,7 +1,7 @@
 import argparse
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Federate Learning MobileNet CIFAR-10")
+    parser = argparse.ArgumentParser(description="Federate Learning MobileNet CIFAR-10 and MNIST")
 
     # seed, device, train function setting
     parser.add_argument("--seed", type=int, default=845)
