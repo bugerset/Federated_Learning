@@ -159,5 +159,20 @@ With FedAVG, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs
 <br>With FedProx, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs=5, batch_sie=50, lr=1e-2, rounds=200, partition="niid", alpha=0.4:
 <br>91 Round ACC=59.35%, loss = 1.119520
 <br>104 Round ACC=61.32%, loss=1.094311
+<br>132 Round ACC=61.96%, loss=1.069016
+<br>138 Round ACC=62.38%, loss=1.070478
+<br>149 Round ACC=63.00%, loss=1.062149
+<br>174 Round ACC=63.16%, loss=1.059052
+
+<br>With SCAFFOLD, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs=5, batch_sie=50, lr=1e-2, rounds=200, partition="niid", alpha=0.4:
+<br>91 Round ACC=59.35%, loss = 1.119520
+<br>104 Round ACC=61.32%, loss=1.094311
+<br>132 Round ACC=61.96%, loss=1.069016
+<br>138 Round ACC=62.38%, loss=1.070478
+<br>149 Round ACC=63.00%, loss=1.062149
+<br>174 Round ACC=63.16%, loss=1.059052
+
+
+
 
 
