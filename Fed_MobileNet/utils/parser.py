@@ -12,7 +12,8 @@ def parse_args():
     # dataset setting
     parser.add_argument("--data-set", type=str, default="cifar10", choices=["cifar10, mnist"])
     parser.add_argument("--data-root", type=str, default="./data")
-    parser.add_argument("--augment", action="store_true")
+    parser.add_argument("--augment", dest="augment", action="store_true", default=True)
+    parser.add_argument("--no-augment", dest="augment", action="store_false")
     parser.add_argument("--normalize", dest="normalize", action="store_true", default=True)
     parser.add_argument("--no-normalize", dest="normalize", action="store_false")
     parser.add_argument("--test-batch-size", type=int, default=128)
