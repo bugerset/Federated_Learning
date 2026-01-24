@@ -151,3 +151,10 @@ Each round prints evaluation results like:
 === Evaluate global model 1 Round ===
 [01] acc=XX.XX%, loss=Y.YYYYYY
 ```
+
+With FedAVG, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs=5, batch_size=50, lr=le-2, rounds=200, partition="niid", alpha=0.4:
+91 Round ACC=66.30%, loss=0.972281
+113 Round ACC=66.80%, loss=0.975469
+
+With FedProx, data_set="cifar10", num_clients=100, client_frac=0.25, local_epochs=5, batch_sie=50, lr=1e-2, rounds=200, partition="niid", alpha=0.4:
+
