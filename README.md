@@ -150,5 +150,4 @@ Each round prints evaluation results like:
 ```bash
 === Evaluate global model 1 Round ===
 [01] acc=XX.XX%, loss=Y.YYYYYY
-=====================================
 ```
