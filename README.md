@@ -93,43 +93,43 @@ python main.py --device auto
 Key arguments (from utils/parser.py):
 ```
 	•	Reproducibility / compute
-	•	--seed (default: 845)
-	•	--device in {auto,cpu,cuda,mps}
+		•	--seed (default: 845)
+		•	--device in {auto,cpu,cuda,mps}
 
 	•	Training method
-	•	--train in {fedavg,fedsgd,fedprox,scaffold}
-	•	--mu (FedProx proximal strength, default 0.1)
+		•	--train in {fedavg,fedsgd,fedprox,scaffold}
+		•	--mu (FedProx proximal strength, default 0.1)
 
 	•	Dataset
-	•   --data-set (default cifar10, choices=[cifar10, mnist])
-	•	--data-root (default ./data)
-	•	--augment / --no-augment
-	•	--normalize / --no-normalize
-	•	--test-batch-size (default 128)
+		•   --data-set (default cifar10, choices=[cifar10, mnist])
+		•	--data-root (default ./data)
+		•	--augment / --no-augment
+		•	--normalize / --no-normalize
+		•	--test-batch-size (default 128)
 
 	•	Federated learning config
-	•	--num-clients (default 10)
-	•	--client-frac fraction of clients sampled per round (default 0.25)
-	•	--local-epochs (default 1)
-	•	--batch-size (default 100)
-	•	--lr learning rate (default 1e-2)
-	•	--rounds communication rounds (default 10)
+		•	--num-clients (default 10)
+		•	--client-frac fraction of clients sampled per round (default 0.25)
+		•	--local-epochs (default 1)
+		•	--batch-size (default 100)
+		•	--lr learning rate (default 1e-2)
+		•	--rounds communication rounds (default 10)
 
 	•	Data partitioning
-	•	--partition in {iid,niid}
-	•	--alpha: Dirichlet concentration parameter controlling Non-IID severity.
-		    ├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
-		  	├──	α = 0.5: moderate Non-IID (default)
-		  	└──	α = 0.8 ~ 1.0: closer to IID
-	•	--min-size minimum samples per client in non-IID (default 10)
-	•	--print-labels / --no-print-labels
+		•	--partition in {iid,niid}
+		•	--alpha: Dirichlet concentration parameter controlling Non-IID severity.
+		    	├── α = 0.1 ~ 0.3: highly skewed label distribution (strong Non-IID)
+		  		├──	α = 0.5: moderate Non-IID (default)
+		  		└──	α = 0.8 ~ 1.0: closer to IID
+		•	--min-size minimum samples per client in non-IID (default 10)
+		•	--print-labels / --no-print-labels
 
 	•	Learning rate Scheduler (ReduceOnPlateau)
-	•	--lr-factor learning rate * factor (default 0.5)
-	•	--lr-patience (default 5)
-	•	--min-lr (deafult 1e-6)
-	•	--lr-threshold (default 1e-4)
-	•	--lr-cooldown (default 0)
+		•	--lr-factor learning rate * factor (default 0.5)
+		•	--lr-patience (default 5)
+		•	--min-lr (deafult 1e-6)
+		•	--lr-threshold (default 1e-4)
+		•	--lr-cooldown (default 0)
 ```
 
 Notes on Implementation
